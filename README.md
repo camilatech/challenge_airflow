@@ -1,9 +1,7 @@
 # Indicium Lighthouse - Desafio Airflow
 
 ## Observações Iniciais
-Utilizei como base o README da aula "Osquestrando Airflow 10/02".
-
-Na parte da criação do DAG, por alguma razão desconhecida por mim, meu airflow não constava que existia um dag quando inicialmente colocava o código do "dag_desafio.py"(criado por mim). Então adicionei uma intermediária que era utilizar o código do "example_desafio.py" e depois trocar para "dag_desafio.py".
+Foi utilizado como base o README da aula "Osquestrando Airflow 10/02".
 
 
 ## Clonando o repositório
@@ -36,9 +34,9 @@ Já que o Airflow procura por DAGs na em arquivos .py no diretório:
 AIRFLOW_HOME/dags
 ```
 
-E nosso caso AIRFLOW_HOME é airflow-data, então criaremos uma pasta "dags" e um arquivo "desafio.py" dentro de airflow-data.
-No arquivo "desafio.py" colocaremosconteúdo do "example_desafio.py". 
-Dê um refresh no airflow e veja se o dag apareceu. Depois que apareceu, apague o conteúdo que está no "desafio.py" e coloque o do "dag_desafio.py" dentro.
+E nosso caso AIRFLOW_HOME é airflow-data, então criaremos uma pasta "dags" no airflow-data e dentro delo um arquivo "desafio.py".
+No arquivo "desafio.py" colocaremos o conteúdo do "dag_desafio.py". 
+Dê um refresh no airflow e veja se o dag apareceu. 
 Com isso, temos o nosso DAG pronto para rodar.
 
 ## Por dentro do DAG do Airflow
