@@ -69,10 +69,9 @@ def dcount():
     OrderDetail = pd.read_csv('output_ordersdetail.csv')
     output = pd.merge(Order, OrderDetail, how="inner", left_on="Id",right_on='OrderId')
     ds = output.groupby('ShipCity').sum()
-    with open('count.txt', 'w') as w:
+    with open('final_output.txt', 'w') as w:
         w.write(str(int(ds.loc['Rio de Janeiro']['Quantity'])))
-    print("count.txt exists!")
-
+    print("final_output.txt exists!")
 
 
 #criacao do DAG
@@ -81,7 +80,7 @@ with DAG(
     default_args=default_args,
     description='Desafio de Airflow da Indicium',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2021, 2, 14),
     catchup=False,
     tags=['example'],
 ) as dag:
@@ -156,7 +155,7 @@ with DAG(
         Desafio 2:
     Essa task faz um `JOIN` do arquivo "output_orders.csv" com "output_ordersdetail.csv". 
     Depois calcula qual a soma da quantidade vendida (*Quantity*) com destino (*ShipCity*) para o Rio de Janeiro. 
-    A seguir exporta essa contagem em arquivo "count.txt".
+    A seguir exporta essa contagem em arquivo "final_output.txt".
     """
     )
     #criando dependencias

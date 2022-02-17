@@ -63,7 +63,7 @@ with DAG(
     default_args=default_args,
     description='Desafio de Airflow da Indicium',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2021, 2, 14),
     catchup=False,
     tags=['example'],
 ) as dag:
@@ -97,25 +97,25 @@ def dload_sqlite():
 def dorder():
    con = sqlite3.connect("/home/carmilla/airflow_tooltorial/data/Northwind_small.sqlite")
    Order = pd.read_sql_query("SELECT * from 'Order'", con)
-   Order.to_csv("order.csv")
-   print("Tabela Order importada com sucesso")
+   Order.to_csv("output_orders.csv")
+   print("output_orders.csv exists!")
    con.close()
 
 def dorder_detail():
     con = sqlite3.connect("/home/carmilla/airflow_tooltorial/data/Northwind_small.sqlite")
     OrderDetail = pd.read_sql_query("SELECT * from 'OrderDetail'", con)
-    OrderDetail.to_csv("orderdetail.csv")
-    print("Tabela OrderDetail importada com sucesso")
+    OrderDetail.to_csv("output_ordersdetail.csv")
+    print("output_ordersdetail.csv exists!")
     con.close()
 
-def output_orders():
-    Order = pd.read_csv('order.csv')
-    OrderDetail = pd.read_csv('orderdetail.csv')
+def dcount():
+    Order = pd.read_csv('output_orders.csv')
+    OrderDetail = pd.read_csv('output_ordersdetail.csv')
     output = pd.merge(Order, OrderDetail, how="inner", left_on="Id",right_on='OrderId')
     ds = output.groupby('ShipCity').sum()
-    with open('count.txt', 'w') as w:
+    with open('final_output.txt', 'w') as w:
         w.write(str(int(ds.loc['Rio de Janeiro']['Quantity'])))
-    print("Arquivo salvo com sucesso")
+    print("final_output.txt exists!")
 ```
 
 
@@ -156,7 +156,7 @@ Para resolver o problema, utilizamos 5 tasks na seguinte ordem:
 - task2: parte do desafio 2
 - export_final_output: parte do desafio 2
 
-então foi criado as seguintes dependencias:
+Então foi criado as seguintes dependencias:
 
 ```
     extract_sqlite3_task >> load_sqlite3_data_to_db_task >> task1 >> task2 >> export_final_output
@@ -178,9 +178,5 @@ Mais detalhes das tasks:
     Desafio 2:
     Essa task faz um `JOIN` do arquivo "output_orders.csv" com "output_ordersdetail.csv". 
     Depois calcula qual a soma da quantidade vendida (*Quantity*) com destino (*ShipCity*) para o Rio de Janeiro. 
-    A seguir exporta essa contagem em arquivo "count.txt".
+    A seguir exporta essa contagem em arquivo "final_output.txt".
     
-
-
-
-
