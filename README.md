@@ -1,25 +1,5 @@
 # Indicium Lighthouse - Desafio Airflow
 
-## Observações Iniciais
-Foi utilizado como base o README da aula "Osquestrando Airflow 10/02".
-
-
-## Clonando o repositório
-O primeiro passo é clonar o repositório para um novo repositório no seu computador:
-
-```
-git clone git@bitbucket.org:indiciumtech/airflow_tooltorial.git
-```
-
-Depois abrir a pasta do arquivo:
-
-```
-cd airflow_tooltorial
-```
-
-Utilize o README.md presente no "airflow_tooltorial" para instalar o airflow na sua máquina e fazer as configurações até o final do "Limpando os Dags de Exemplo".
-
-
 ## DAG
 
 Inicialmente vamos instalar os pacotes:
